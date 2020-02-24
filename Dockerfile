@@ -5,11 +5,11 @@ RUN umask 0000
 ENV WORKSPACE /workspace/
 RUN mkdir $WORKSPACE
 WORKDIR $WORKSPACE
-ENV BASEDIR /base/
+ENV BASEDIR $WORKSPACE/base/
 RUN mkdir $BASEDIR
-ADD .image/ $BASEDIR
-ENV VOLUME $WORKSPACE/volume/
-RUN mkdir $VOLUME
+ADD . $BASEDIR
+ENV MOUNTDIR $WORKSPACE/mount/
+RUN mkdir $MOUNTDIR
 
 RUN apt-get update -y
 RUN apt-get install -y software-properties-common
@@ -21,7 +21,8 @@ RUN alias python=python3
 RUN apt-get install -y python3-pip
 
 RUN export PYTHONPATH=$PYTHONPATH:$WORKSPACE
-RUN export PYTHONPATH=$PYTHONPATH:$VOLUME
+RUN export PYTHONPATH=$PYTHONPATH:$BASEDIR
+RUN export PYTHONPATH=$PYTHONPATH:$MOUNTDIR
 
 RUN pip3 install --no-cache-dir scons
 RUN apt-get install -y libxml2-dev
