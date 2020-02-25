@@ -2,13 +2,13 @@ FROM ubuntu:bionic-20200112
 MAINTAINER https://github.com/rsbyrne/
 
 RUN umask 0000
-ENV WORKSPACE /workspace/
+ENV WORKSPACE /workspace
 RUN mkdir $WORKSPACE
 WORKDIR $WORKSPACE
-ENV BASEDIR $WORKSPACE/base/
+ENV BASEDIR $WORKSPACE/base
 RUN mkdir $BASEDIR
 ADD . $BASEDIR
-ENV MOUNTDIR $WORKSPACE/mount/
+ENV MOUNTDIR $WORKSPACE/mount
 RUN mkdir $MOUNTDIR
 
 RUN apt-get update -y
@@ -20,9 +20,9 @@ RUN apt-get install -y ffmpeg
 RUN alias python=python3
 RUN apt-get install -y python3-pip
 
-RUN export PYTHONPATH=$PYTHONPATH:$WORKSPACE
-RUN export PYTHONPATH=$PYTHONPATH:$BASEDIR
-RUN export PYTHONPATH=$PYTHONPATH:$MOUNTDIR
+ENV PYTHONPATH "${PYTHONPATH}:$WORKSPACE"
+ENV PYTHONPATH "${PYTHONPATH}:$BASEDIR"
+ENV PYTHONPATH "${PYTHONPATH}:$MOUNTDIR"
 
 RUN pip3 install --no-cache-dir scons
 RUN apt-get install -y libxml2-dev
@@ -43,8 +43,9 @@ WORKDIR $WORKSPACE/underworld2/libUnderworld
 RUN ./configure.py --prefix=/underworld/install/directory
 RUN ./compile.py
 RUN ./scons.py install
-RUN export PYTHONPATH=$PYTHONPATH:$WORKSPACE/underworld2
-RUN export PYTHONPATH=$PYTHONPATH:$WORKSPACE/underworld2/libUnderworld/build/lib
+ENV UWDIR $WORKSPACE/underworld2
+ENV PYTHONPATH "${PYTHONPATH}:$UWDIR"
+ENV PYTHONPATH "${PYTHONPATH}:$UWDIR/libUnderworld/build/lib"
 WORKDIR $WORKSPACE
 
 RUN pip3 install --no-cache-dir scipy
