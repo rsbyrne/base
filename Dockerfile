@@ -24,28 +24,6 @@ ENV PYTHONPATH "${PYTHONPATH}:$WORKSPACE"
 ENV PYTHONPATH "${PYTHONPATH}:$BASEDIR"
 ENV PYTHONPATH "${PYTHONPATH}:$MOUNTDIR"
 
-RUN pip3 install --no-cache-dir scons
-RUN apt-get install -y libxml2-dev
-RUN apt-get install -y swig
-RUN apt-get install -y petsc-dev
-RUN apt-get install -y mpich
-RUN apt-get install -y openmpi-bin
-RUN pip3 install --no-cache-dir mpi4py
-RUN apt-get install -y libhdf5-mpi-dev
-RUN pip3 install --no-cache-dir h5py
-RUN apt-get install -y build-essential libgl1-mesa-dev libx11-dev zlib1g-dev
-RUN pip3 install --no-cache-dir lavavu
-
-RUN git clone https://github.com/underworldcode/underworld2.git
-WORKDIR $WORKSPACE/underworld2
-RUN git checkout regionalMesh
-WORKDIR $WORKSPACE/underworld2/libUnderworld
-RUN ./configure.py --prefix=/underworld/install/directory
-RUN ./compile.py
-RUN ./scons.py install
-ENV UWDIR $WORKSPACE/underworld2
-ENV PYTHONPATH "${PYTHONPATH}:$UWDIR"
-ENV PYTHONPATH "${PYTHONPATH}:$UWDIR/libUnderworld/build/lib"
 WORKDIR $WORKSPACE
 
 RUN pip3 install --no-cache-dir scipy
