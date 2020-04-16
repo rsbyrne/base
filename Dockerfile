@@ -34,3 +34,4 @@ RUN pip3 install --no-cache-dir Flask
 RUN pip3 install --no-cache-dir dask[complete]
 RUN pip3 install --no-cache-dir scikit-learn
 RUN pip3 install --no-cache-dir tensorflow
+RUN pip3 install --no-cache-dir jupyterlab
