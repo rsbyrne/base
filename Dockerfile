@@ -11,6 +11,8 @@ ADD . $BASEDIR
 ENV MOUNTDIR $WORKSPACE/mount
 RUN mkdir $MOUNTDIR
 
+RUN apt update
+
 RUN apt-get update -y
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y python3-venv
@@ -35,3 +37,5 @@ RUN pip3 install --no-cache-dir dask[complete]
 RUN pip3 install --no-cache-dir scikit-learn
 RUN pip3 install --no-cache-dir tensorflow
 RUN pip3 install --no-cache-dir jupyterlab
+
+RUN apt install apache2
