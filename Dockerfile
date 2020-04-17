@@ -29,6 +29,7 @@ ENV PYTHONPATH "${PYTHONPATH}:$MOUNTDIR"
 
 WORKDIR $WORKSPACE
 
+RUN pip3 install --no-cache-dir matplotlib
 RUN pip3 install --no-cache-dir scipy
 RUN pip3 install --no-cache-dir pandas
 RUN pip3 install --no-cache-dir Pillow
