@@ -9,7 +9,6 @@ ENV BASEDIR $WORKSPACE/base
 RUN mkdir $BASEDIR
 ADD . $BASEDIR
 ENV MOUNTDIR $WORKSPACE/mount
-#RUN mkdir $MOUNTDIR
 VOLUME $MOUNTDIR
 
 RUN apt update
@@ -34,6 +33,6 @@ ENV PYTHONPATH "${PYTHONPATH}:$MOUNTDIR"
 ENV PYTHONPATH "${PYTHONPATH}:$BASEDIR"
 
 RUN useradd -p $(openssl passwd -1 'Morpheus-1999!') morpheus
-USER morpheus
+#USER morpheus
 
 WORKDIR $WORKSPACE
