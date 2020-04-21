@@ -30,18 +30,21 @@ RUN chown -R $MASTERUSER $MASTERUSERHOME
 # set up passwordless sudo for master user
 RUN echo '$MASTERUSER ALL = (ALL) NOPASSWD: ALL' | EDITOR='tee -a' visudo
 
+# install other softwares
+RUN apt-get install -y apt-utils
+RUN apt-get install -y curl
+RUN apt-get install -y wget
+RUN apt-get install -y git
+RUN apt-get install -y nano
+RUN apt-get install -y ffmpeg
+RUN apt-get install -y apache2
+
 # change to master user
 USER $MASTERUSER
 WORKDIR $MASTERUSERHOME
 
-# install other softwares
-RUN sudo apt-get install -y apt-utils
-RUN sudo apt-get install -y curl
-RUN sudo apt-get install -y wget
-RUN sudo apt-get install -y git
-RUN sudo apt-get install -y nano
-RUN sudo apt-get install -y ffmpeg
-RUN sudo apt-get install -y apache2
+# testing
+USER root
 
 # junk
 #RUN apt update
