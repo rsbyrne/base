@@ -35,6 +35,7 @@ USER $MASTERUSER
 WORKDIR $HOME
 
 # install other softwares
+#RUN sudo apt-get install -y apt-utils
 #RUN sudo apt-get install -y curl
 #RUN sudo apt-get install -y wget
 #RUN sudo apt-get install -y git
