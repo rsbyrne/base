@@ -32,16 +32,16 @@ RUN echo '$MASTERUSER ALL = (ALL) NOPASSWD: ALL' | EDITOR='tee -a' visudo
 
 # change to master user
 USER $MASTERUSER
-WORKDIR $HOME
+WORKDIR $MASTERUSERHOME
 
 # install other softwares
-#RUN sudo apt-get install -y apt-utils
-#RUN sudo apt-get install -y curl
-#RUN sudo apt-get install -y wget
-#RUN sudo apt-get install -y git
-#RUN sudo apt-get install -y nano
-#RUN sudo apt-get install -y ffmpeg
-#RUN sudo apt-get install -y apache2
+RUN sudo apt-get install -y apt-utils
+RUN sudo apt-get install -y curl
+RUN sudo apt-get install -y wget
+RUN sudo apt-get install -y git
+RUN sudo apt-get install -y nano
+RUN sudo apt-get install -y ffmpeg
+RUN sudo apt-get install -y apache2
 
 # junk
 #RUN apt update
