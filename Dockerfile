@@ -43,8 +43,5 @@ RUN apt-get install -y apache2
 USER $MASTERUSER
 WORKDIR $MASTERUSERHOME
 
-# testing
-USER root
-
 # junk
 #RUN apt update
