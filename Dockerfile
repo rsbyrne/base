@@ -11,7 +11,7 @@ RUN apt-get install -y sudo
 RUN apt-get install -y vim
 
 # configure master user
-RUN useradd -p $(openssl passwd -1 '$MASTERPASSWD') $MASTERUSER
+RUN useradd -p $(openssl passwd -1 $MASTERPASSWD) $MASTERUSER
 RUN usermod -aG sudo $MASTERUSER
 
 # configure user directories
@@ -28,7 +28,7 @@ ADD . $BASEDIR
 RUN chown -R $MASTERUSER $MASTERUSERHOME
 
 # set up passwordless sudo for master user
-RUN echo '$MASTERUSER ALL = (ALL) NOPASSWD: ALL' | EDITOR='tee -a' visudo
+RUN echo $MASTERUSER 'ALL = (ALL) NOPASSWD: ALL' | EDITOR='tee -a' visudo
 
 # install other softwares
 RUN apt-get install -y apt-utils
