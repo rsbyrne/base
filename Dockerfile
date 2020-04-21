@@ -1,20 +1,9 @@
 FROM ubuntu:bionic-20200112
 MAINTAINER https://github.com/rsbyrne/
 
-RUN umask 0000
-ENV TOOLS /tools
-RUN mkdir $TOOLS
-ENV WORKSPACE $HOME/workspace
-RUN mkdir $WORKSPACE
-WORKDIR $WORKSPACE
-ENV BASEDIR $WORKSPACE/base
-RUN mkdir $BASEDIR
-ADD . $BASEDIR
-ENV MOUNTDIR $WORKSPACE/mount
-VOLUME $MOUNTDIR
-
 RUN apt-get update -y
 RUN apt-get install -y software-properties-common
+RUN apt-get install -y sudo
 
 #RUN apt-get install -y curl
 #RUN apt-get install -y wget
@@ -24,8 +13,20 @@ RUN apt-get install -y software-properties-common
 #RUN apt-get install -y apache2
 
 RUN useradd -p $(openssl passwd -1 'Morpheus-1999!') morpheus
-#USER morpheus
+RUN usermod -aG sudo morpheus
+ENV MORPHEUSHOME /home/morpheus
+RUN mkdir /home/morpheus
+ENV WORKSPACE $MORPHEUSHOME/workspace
+RUN mkdir $WORKSPACE
+ENV TOOLS $MORPHEUSHOME/tools
+RUN mkdir $TOOLS
+ENV MOUNTDIR $WORKSPACE/mount
+VOLUME $MOUNTDIR
+ENV BASEDIR $MORPHEUSHOME/base
+ADD . $BASEDIR
+RUN chown -R morpheus $MORPHEUSHOME
 
-WORKDIR $WORKSPACE
+USER morpheus
+WORKDIR $HOME
 
 #RUN apt update
