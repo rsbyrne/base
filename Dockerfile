@@ -3,7 +3,7 @@ MAINTAINER https://github.com/rsbyrne/
 
 RUN umask 0000
 ENV TOOLS /tools
-RUN mdkir $TOOLS
+RUN mkdir $TOOLS
 ENV WORKSPACE $HOME/workspace
 RUN mkdir $WORKSPACE
 WORKDIR $WORKSPACE
