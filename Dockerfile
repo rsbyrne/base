@@ -1,4 +1,5 @@
-FROM ubuntu:bionic-20200112
+# FROM ubuntu:bionic-20200112
+FROM python:3
 MAINTAINER https://github.com/rsbyrne/
 
 ENV MASTERUSER morpheus
