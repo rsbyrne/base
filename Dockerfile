@@ -1,7 +1,9 @@
+MAINTAINER https://github.com/rsbyrne/
+
 # FROM ubuntu:bionic-20200112
 # FROM python:3
-FROM ubuntu:focal-20200729
-MAINTAINER https://github.com/rsbyrne/
+# FROM ubuntu:focal-20200729
+FROM ubuntu:groovy-20201022.1
 
 ENV MASTERUSER morpheus
 ENV MASTERPASSWD Matrix-1999!
