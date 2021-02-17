@@ -1,9 +1,5 @@
+FROM ubuntu:groovy-20210115
 MAINTAINER https://github.com/rsbyrne/
-
-# FROM ubuntu:bionic-20200112
-# FROM python:3
-# FROM ubuntu:focal-20200729
-FROM ubuntu:groovy-20201022.1
 
 ENV MASTERUSER morpheus
 ENV MASTERPASSWD Matrix-1999!
@@ -46,9 +42,20 @@ RUN apt-get install -y nano
 RUN apt-get install -y ffmpeg
 RUN apt-get install -y apache2
 
+# install Python3.9
+RUN apt update
+RUN apt install -y software-properties-common
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt install -y python3.9
+
 # change to master user
 USER $MASTERUSER
 WORKDIR $MASTERUSERHOME
+
+# aliases
+RUN echo -e "\nalias python=python3.9" >> ~/.bashrc
+RUN echo -e "\nalias python3=python3.9" >> ~/.bashrc
+RUN source ~/.bashrc
 
 # junk
 #RUN apt update
